@@ -1,0 +1,9 @@
+
+.wrapper {
+    width: 20%;
+}
+.addNewBook__form {
+    display: flex;
+    flex-direction: column;
+}
+
