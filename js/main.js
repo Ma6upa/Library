@@ -118,8 +118,7 @@ function edit(id){
     let newTitle = document.createElement('input');
     newTitle.setAttribute('value', `${books[books.indexOf(book)].title}`);
     let newText = document.createElement('textarea');
-    newText.style.width = '70%';
-    newText.style.height = '70%';
+    newText.style.height = '700px';
     newText.style.wordWrap = 'break-word';
     newText.innerHTML = `${books[books.indexOf(book)].text}`;
     let newButton = document.createElement('input');
