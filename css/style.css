@@ -8,29 +8,57 @@ body{
 .wrapper {
     display: flex;
     flex-direction: column;
-    width: 800px;
-    border-right: black 3px solid;
+    width: 600px;
+    border-right: black 5px solid;
+}
+
+.name {
+    background-color: gray;
+}
+
+.addNewBook {
+    display: flex;
+    flex-direction: column;
+}
+
+.addNewBook__form-name {
+    margin-bottom: 20px;
+}
+
+.addNewBook__form-button {
+    width: 100px;
+    margin-top: 10px;
+}
+
+.addNewBook__form-text {
+    height:250px;
+    width: 500px;
+    display: flex;
+    justify-content: start;
 }
 
 .read {
     align-items: center;
+    word-wrap: break-word;
 }
 
 .read__space {
-    width: 700px;
+    width: 900px;
+    height: 1000px;
+    overflow: auto;
 }
 
 .books__item {
     display: flex;
     flex-direction: row;
-    background-color: gray;
+    background-color: #d3d3d3;
     align-items: center;
 }
 
 .books__item-wasRead {
     display: flex;
     flex-direction: row;
-    background-color: green;
+    background-color: #90ee90;
     align-items: center;
 }
 
@@ -40,7 +68,30 @@ body{
 }
 
 .books__item-button {
-    margin: 0 5px;
+    cursor:pointer;
+    margin: 5px 5px;
     height: 20px;
+    border-radius: 5px;
+    border-style:none;
 }
 
+.books__item-button-delete {
+    color: white;
+    background-color: #D55E5E;
+    cursor:pointer;
+    margin: 5px 5px;
+    height: 20px;
+    border-radius: 5px;
+    border-style:none;
+}
+
+.dropzone-start{
+    height: 50px;
+    background-color: white;
+}
+.dropzone-drop{
+    height: 50px;
+    border: 2px solid gray;
+    background-color: honeydew;
+    text-align: center;
+}
