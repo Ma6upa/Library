@@ -1,9 +1,46 @@
 
-.wrapper {
-    width: 20%;
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
-.addNewBook__form {
+
+.wrapper {
     display: flex;
     flex-direction: column;
+    width: 800px;
+    border-right: black 3px solid;
+}
+
+.read {
+    align-items: center;
+}
+
+.read__space {
+    width: 700px;
+}
+
+.books__item {
+    display: flex;
+    flex-direction: row;
+    background-color: gray;
+    align-items: center;
+}
+
+.books__item-wasRead {
+    display: flex;
+    flex-direction: row;
+    background-color: green;
+    align-items: center;
+}
+
+.books__item-title {
+    width:100px;
+    word-wrap: break-word
+}
+
+.books__item-button {
+    margin: 0 5px;
+    height: 20px;
 }
 
