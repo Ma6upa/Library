@@ -9,13 +9,19 @@
 </head>
 <body>
     <div class="wrapper">
+        <div class="favorites">
+            <div class="name">Мои любимые книги</div>
+            <div class="favorites__books"></div>
+            <div class="dropzone-start" ></div>
+        </div>
         <div class="books">
-            <div class="name">Мои книги</div>
+            <div class="name">Список книг</div>
             <div class="books__list">
                 
             </div>
         </div>
         <div class="addNewBook">
+            <div class="name">Добавить книгу</div>
             <div>
                 <p>
                     <input name="choose" type="radio" id="write"> Написать самому
@@ -25,13 +31,13 @@
                 </p>
             </div>
             <form class="addNewBook__form" name="writeForm">
-                Название
+                Название:
                 <input class="addNewBook__form-name"  type="text" name="title">
                 <textarea class="addNewBook__form-text"  placeholder="Текст..." name="text"></textarea>
                 <input class="addNewBook__form-button" id="writeButton" type="button" value="Загрузить..." >
             </form>
             <form class="addNewBook__form" name="uploadForm" enctype="multipart/form-data">
-                Название
+                Название:
                 <input class="addNewBook__form-name"  type="text" name="login">
                 <input class="addNewBook__form-file" type="file" name="file" accept="text/*">
                 <input class="addNewBook__form-button" id="uploadButton" type="button" value="Загрузить..." >

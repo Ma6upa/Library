@@ -26,7 +26,8 @@ document.querySelector('#writeButton').addEventListener('click', function writeB
         title: title,
         text: text,
         id: Date.now(),
-        wasRead: false
+        wasRead: false,
+        isFavorite: false
     }
     library.push(book);
     localStorage.setItem('library', JSON.stringify(library));
@@ -93,6 +94,7 @@ function deleteBook(id){
     books.splice(number, 1);
     localStorage.setItem('library', JSON.stringify(books));
     bookList();
+    location.reload();
 }
 
 function changeStatus(id){
@@ -140,6 +142,8 @@ function bookList() {
     sort()
     let booksList = document.querySelector('.books__list');
     booksList.innerHTML = '';
+    let favBooks = document.querySelector('.favorites__books');
+    favBooks.innerHTML = '';
     let books = localStorage['library'];
     localStorage['library'] != undefined ? books = JSON.parse(localStorage['library']) : console.log('пустой LS');
 
@@ -151,11 +155,19 @@ function bookList() {
             let book = document.createElement('div');
 
             booksList.appendChild(book);
+            if(booksArrCopy[i].isFavorite == true){
+                favBooks.appendChild(book);
+            }
             if (booksArrCopy[i].wasRead == false){
                 book.classList.add('books__item');
             } else {
-                book.classList.add('books__item-wasRead')
+                book.classList.add('books__item-wasRead');
             }
+
+            book.setAttribute('id', id);
+            book.setAttribute('draggable', 'true');
+            book.ondragstart = dragStart;
+            book.ondragend = dragEnd;
 
             let bookTitle = document.createElement('div');
             book.appendChild(bookTitle);
@@ -171,7 +183,7 @@ function bookList() {
     
             let deleteButton = document.createElement('input');
             book.appendChild(deleteButton)
-            deleteButton.classList.add('book_card-button');
+            deleteButton.classList.add('books__item-button-delete');
             deleteButton.setAttribute('type', 'button');
             deleteButton.setAttribute('value', 'Удалить книгу');
             deleteButton.setAttribute('onClick', `deleteBook(${id})`);
@@ -191,6 +203,38 @@ function bookList() {
             editButton.setAttribute('onClick', `edit(${id})`);
         }
     }
+}
+
+const dropzone = document.querySelector('.dropzone-start')
+dropzone.ondragover = allowDrop;
+dropzone.ondrop = drop;
+    
+function allowDrop(event){
+    event.preventDefault();
+}
+
+function dragStart(event){
+    dropzone.classList.add('dropzone-drop');
+    event.dataTransfer.setData('id', event.target.id);
+    console.log(event.target.id);
+    dropzone.innerHTML = 'Любимые книги';
+}
+
+function dragEnd(){
+    dropzone.classList.remove('dropzone-drop');
+    dropzone.classList.add('dropzone-start');
+    dropzone.innerHTML = '';
+}
+
+function drop(event){
+    let bookId = event.dataTransfer.getData('id');
+    let books = localStorage['library'];
+    localStorage['library'] != undefined ? books = JSON.parse(localStorage['library']) : console.log('пустой LS');
+    let book = books.find(book => book.id === Number(bookId));
+    let number =  books.indexOf(book);
+    books[number].isFavorite = true;
+    localStorage.setItem('library', JSON.stringify(books));
+    bookList();
 }
 
 window.onload = bookList
