@@ -5,6 +5,8 @@ body{
     justify-content: space-evenly;
 }
 
+
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -89,7 +91,19 @@ body{
     height: 50px;
     background-color: white;
 }
+
+.dropzone-start2{
+    height: 50px;
+    background-color: white;
+}
+
 .dropzone-drop{
+    height: 50px;
+    border: 2px solid gray;
+    background-color: honeydew;
+    text-align: center;
+}
+.dropzone-drop2{
     height: 50px;
     border: 2px solid gray;
     background-color: honeydew;
