@@ -105,6 +105,7 @@ function changeStatus(id){
     books[number].wasRead = !books[number].wasRead;
     localStorage.setItem('library', JSON.stringify(books));
     bookList();
+    location.reload();
 }
 
 function edit(id){
@@ -156,6 +157,17 @@ function bookList() {
             booksList.appendChild(book);
             if(booksArrCopy[i].isFavorite == true){
                 favBooks.appendChild(book);
+                book.setAttribute('id', id);
+                book.setAttribute('draggable', 'true');
+                book.ondragstart = dragStart;
+                book.ondragend = dragEnd;
+            }
+            if(booksArrCopy[i].isFavorite == false){
+                booksList.appendChild(book);
+                book.setAttribute('id', id);
+                book.setAttribute('draggable', 'true');
+                book.ondragstart = dragStart;
+                book.ondragend = dragEnd;
             }
             if (booksArrCopy[i].wasRead == false){
                 book.classList.add('books__item');
@@ -207,22 +219,31 @@ function bookList() {
 const dropzone = document.querySelector('.dropzone-start')
 dropzone.ondragover = allowDrop;
 dropzone.ondrop = drop;
-    
+
+const dropzone2 = document.querySelector('.dropzone-start2')
+dropzone2.ondragover = allowDrop;
+dropzone2.ondrop = drop;
+
 function allowDrop(event){
     event.preventDefault();
 }
 
 function dragStart(event){
     dropzone.classList.add('dropzone-drop');
+    dropzone2.classList.add('dropzone-drop2');
     event.dataTransfer.setData('id', event.target.id);
     console.log(event.target.id);
     dropzone.innerHTML = 'Любимые книги';
+    dropzone2.innerHTML = 'Список книг';
 }
 
 function dragEnd(){
     dropzone.classList.remove('dropzone-drop');
     dropzone.classList.add('dropzone-start');
     dropzone.innerHTML = '';
+    dropzone2.classList.remove('dropzone-drop2');
+    dropzone2.classList.add('dropzone-start2');
+    dropzone2.innerHTML = '';
 }
 
 function drop(event){
@@ -231,9 +252,18 @@ function drop(event){
     localStorage['library'] != undefined ? books = JSON.parse(localStorage['library']) : console.log('пустой LS');
     let book = books.find(book => book.id === Number(bookId));
     let number =  books.indexOf(book);
-    books[number].isFavorite = true;
-    localStorage.setItem('library', JSON.stringify(books));
-    bookList();
+    if (books[number].isFavorite == false) {
+        books[number].isFavorite = true;
+        localStorage.setItem('library', JSON.stringify(books));
+        bookList();
+        location.reload();
+    } else {
+        books[number].isFavorite = false;
+        localStorage.setItem('library', JSON.stringify(books));
+        bookList();
+        location.reload();
+    }
+    
 }
 
 window.onload = bookList
